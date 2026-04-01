@@ -1,4 +1,4 @@
-﻿using TaskManagerAPI.Models;
+using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.DTOs
 {
@@ -8,5 +8,6 @@ namespace TaskManagerAPI.DTOs
         public string Description { get; set; } = string.Empty;
         public DateTime? DueDate { get; set; }
         public Priority Priority { get; set; } = Priority.Low;
+        public bool IsCompleted { get; set; }
     }
 }

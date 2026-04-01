@@ -88,6 +88,7 @@ namespace TaskManagerAPI.Services
             task.Description = dto.Description;
             task.Priority = dto.Priority;
             task.DueDate = dto.DueDate;
+            task.IsCompleted = dto.IsCompleted;
 
             await _context.SaveChangesAsync();
 
