@@ -1,204 +1,250 @@
-# Full Stack Task Manager Application
+# TaskManagerAPI
 
-Build a full stack task management web application that allows users to create accounts and manage personal tasks. The application should demonstrate clean architecture, REST API design, authentication, and a modern frontend.
+A full-stack task management web application that allows users to create accounts and manage their personal tasks. Built as a portfolio project to demonstrate clean architecture, REST API design, JWT authentication, and modern frontend development.
+
+---
 
 ## Tech Stack
 
-Backend:
+**Backend**
 - ASP.NET Core Web API (.NET 8)
 - Entity Framework Core
 - SQL Server
 - JWT Authentication
+- BCrypt password hashing
 
-Frontend:
-- React (Vite)
-- Axios for API requests
-- Basic CSS or Tailwind
-
-## Core Features
-
-### User Authentication
-Users must be able to:
-
-- Register an account
-- Login
-- Receive a JWT token
-- Access protected task endpoints
-
-Endpoints:
-POST /api/auth/register  
-POST /api/auth/login
-
-Passwords must be hashed.
+**Frontend**
+- React 19 (Vite)
+- React Router DOM
+- Axios
 
 ---
 
-### Task Management
+## Screenshots
 
-Authenticated users can manage tasks.
+### Login Page
+![Login Page](screenshots/login.png)
 
-Task properties:
-- Id
-- Title
-- Description
-- Priority (Low / Medium / High)
-- DueDate
-- IsCompleted
-- CreatedAt
-- UserId
+### Register Page
+![Register Page](screenshots/register.png)
 
-Endpoints:
-
-GET /api/tasks  
-GET /api/tasks/{id}  
-POST /api/tasks  
-PUT /api/tasks/{id}  
-DELETE /api/tasks/{id}
-
-Each user should only see their own tasks.
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
 ---
 
-### Task Features
+## Getting Started
 
-Users should be able to:
+### Prerequisites
 
-- Create tasks
-- Edit tasks
-- Delete tasks
-- Mark tasks as completed
-- View all tasks
-- Filter tasks by completion status
-- Sort tasks by due date
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (or SQL Server Express)
+- [Node.js](https://nodejs.org/) (v18+)
 
 ---
 
-## Database
+### Backend Setup
 
-Use SQL Server with Entity Framework Core.
+1. **Clone the repository**
 
-Tables:
+   ```bash
+   git clone https://github.com/Khumo775-RAM/TaskManagerAPI.git
+   cd TaskManagerAPI
+   ```
 
-Users
-- Id
-- Email
-- PasswordHash
-- CreatedAt
+2. **Configure your local settings**
 
-Tasks
-- Id
-- Title
-- Description
-- Priority
-- DueDate
-- IsCompleted
-- CreatedAt
-- UserId
+   Create an `appsettings.Development.json` file in the root of the project:
 
-Relationships:
-One user -> many tasks.
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=YOUR_SERVER\\SQLEXPRESS;Database=TaskManagerDB;Trusted_Connection=True;TrustServerCertificate=True;"
+     },
+     "Jwt": {
+       "Key": "YOUR_JWT_SECRET_KEY_MIN_32_CHARS",
+       "Issuer": "TaskManagerAPI",
+       "Audience": "TaskManagerClient"
+     }
+   }
+   ```
 
----
+   Replace `YOUR_SERVER` with your SQL Server instance name and `YOUR_JWT_SECRET_KEY_MIN_32_CHARS` with a secret key of at least 32 characters.
 
-## Frontend Pages
+3. **Apply database migrations**
 
-The React application should include:
+   ```bash
+   dotnet ef database update
+   ```
 
-Login Page  
-Register Page  
-Dashboard Page
+4. **Run the API**
 
-Dashboard features:
+   ```bash
+   dotnet run
+   ```
 
-- Display all tasks
-- Create new task form
-- Mark task as complete
-- Edit task
-- Delete task
-- Filter tasks
-
----
-
-## UI Requirements
-
-Keep the UI simple but clean.
-
-Dashboard layout:
-
-Header  
-Task Creation Form  
-Task List
-
-Task List should show:
-
-Title  
-Priority  
-Due Date  
-Completion Status
+   The API will be available at `https://localhost:7001` (or the port shown in your terminal).  
+   Swagger UI is available at `https://localhost:7001/swagger` in development.
 
 ---
 
-## API Design Requirements
+### Frontend Setup
 
-- Use RESTful API conventions
-- Return proper HTTP status codes
-- Use DTOs instead of exposing database models
-- Validate incoming requests
+1. **Navigate to the frontend folder**
+
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+   The app will be available at `http://localhost:5173`.
+
+---
+
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| POST | `/api/auth/register` | Register a new user | No |
+| POST | `/api/auth/login` | Login and receive a JWT token | No |
+
+**Register request body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+
+**Login request body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+
+**Auth response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIs..."
+}
+```
+
+---
+
+### Tasks
+
+All task endpoints require a valid JWT token in the `Authorization` header:
+```
+Authorization: Bearer <your_token>
+```
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/tasks` | Get all tasks for the logged-in user |
+| GET | `/api/tasks/{id}` | Get a specific task by ID |
+| POST | `/api/tasks` | Create a new task |
+| PUT | `/api/tasks/{id}` | Update an existing task |
+| DELETE | `/api/tasks/{id}` | Delete a task |
+
+**Create / Update task request body:**
+```json
+{
+  "title": "Finish project",
+  "description": "Complete the task manager app",
+  "dueDate": "2026-04-01T00:00:00",
+  "priority": 1
+}
+```
+
+Priority values: `0` = Low, `1` = Medium, `2` = High
+
+**Task response:**
+```json
+{
+  "id": 1,
+  "title": "Finish project",
+  "description": "Complete the task manager app",
+  "dueDate": "2026-04-01T00:00:00",
+  "priority": 1,
+  "isCompleted": false,
+  "createdAt": "2026-03-17T10:00:00"
+}
+```
 
 ---
 
 ## Folder Structure
 
-Backend:
+```
+TaskManagerAPI/
+├── Controllers/
+│   ├── AuthController.cs
+│   └── TasksController.cs
+├── Data/
+│   └── AppDbContext.cs
+├── DTOs/
+│   ├── AuthResponseDto.cs
+│   ├── CreateTaskDto.cs
+│   ├── LoginRequestDto.cs
+│   ├── RegisterRequestDto.cs
+│   └── TaskResponseDto.cs
+├── Migrations/
+├── Models/
+│   ├── Priority.cs
+│   ├── TaskItem.cs
+│   └── User.cs
+├── Services/
+│   ├── AuthService.cs
+│   ├── IAuthService.cs
+│   ├── ITaskService.cs
+│   └── TaskService.cs
+├── appsettings.json
+└── Program.cs
 
-/Controllers  
-/Models  
-/DTOs  
-/Services  
-/Data  
-/Migrations
-
-Frontend:
-
-/components  
-/pages  
-/services  
-/hooks
+frontend/
+├── src/
+│   ├── pages/
+│   │   ├── LoginPage.jsx
+│   │   ├── RegisterPage.jsx
+│   │   └── DashboardPage.jsx
+│   ├── services/
+│   │   ├── authService.js
+│   │   └── taskService.js
+│   ├── App.jsx
+│   └── main.jsx
+├── index.html
+└── vite.config.js
+```
 
 ---
 
-## Bonus Features (Optional)
+## Features
 
-If time allows, add:
-
-- Task search
-- Task priority colors
-- Dashboard statistics (completed vs pending tasks)
-- Dark mode
-- Pagination
-
----
-
-## README Requirements
-
-Include in the README:
-
-- Project overview
-- Technologies used
-- Setup instructions
-- API endpoints
-- Screenshots
+- User registration and login with hashed passwords
+- JWT-based authentication with protected routes
+- Create, edit, delete, and complete tasks
+- Set task priority (Low / Medium / High) with colour coding
+- Filter tasks by completion status
+- Each user only sees their own tasks
+- Responsive and clean UI
 
 ---
 
-## Goal
+## Purpose
 
-The purpose of this project is to demonstrate:
-
-- Full stack development
-- REST API design
-- Authentication
-- Database integration
-- React frontend development
-
-This project should be clean, well structured, and suitable for a software developer internship portfolio.
+This project was built to demonstrate full-stack development skills including REST API design, authentication, database integration, and React frontend development. It is intended as a portfolio piece for a software developer internship application.
