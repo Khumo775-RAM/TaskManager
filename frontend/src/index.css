@@ -121,6 +121,66 @@ button[type="button"] {
   background: #fecaca;
 }
 
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-completed .stat-number { color: #10b981; }
+.stat-pending .stat-number { color: #f59e0b; }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.empty-icon {
+    font-size: 3rem;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.empty-state span {
+    font-size: 0.9rem;
+}
+
 /* Task Form */
 .task-form-section {
   background: white;
@@ -163,29 +223,48 @@ button[type="button"] {
   color: white;
 }
 
+/* Animations */
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(40px); }
+}
+
 /* Task List */
 .task-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .task-card {
-  background: white;
-  padding: 16px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-left: 4px solid #4f46e5;
+    background: white;
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid #4f46e5;
+    animation: fade-in-up 0.3s ease forwards;
+}
+
+.task-card.deleting {
+    animation: fade-out 0.4s ease forwards;
+}
+
+.task-card .task-info {
+    flex: 1;
 }
 
 .task-card.completed {
-  opacity: 0.6;
-  border-left-color: #10b981;
-  text-decoration: line-through;
+    opacity: 0.6;
+    border-left-color: #10b981;
 }
 
 .task-info h3 {
@@ -200,8 +279,10 @@ button[type="button"] {
 }
 
 .task-actions {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 /* Priority Badges */
@@ -219,13 +300,122 @@ button[type="button"] {
 .priority-high { background: #fee2e2; color: #991b1b; }
 
 .due-date {
-  font-size: 0.78rem;
-  color: #888;
+    font-size: 0.78rem;
+    color: #888;
+}
+
+/* Complete tick */
+.complete-tick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.complete-tick svg {
+    width: 48px;
+    height: 48px;
+    animation: pop-in 0.3s ease;
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Complete / Undo buttons */
+.btn-complete {
+    background: #10b981;
+    color: white;
+}
+
+.btn-complete:hover {
+    background: #059669;
+}
+
+.btn-undo {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.btn-undo:hover {
+    background: #fde68a;
 }
 
 /* Error */
 .error {
-  color: #ef4444;
-  font-size: 0.88rem;
-  margin-top: 4px;
+    color: #ef4444;
+    font-size: 0.88rem;
+    margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+
+    /* Dashboard padding */
+    .dashboard {
+        padding: 16px;
+    }
+
+    /* Header stacks vertically */
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    /* Stats bar stacks */
+    .stats-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Task form inputs fill full width */
+    .task-form {
+        flex-direction: column;
+    }
+
+    .task-form input,
+    .task-form select,
+    .task-form button {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    /* Task card stacks vertically */
+    .task-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    /* Tick stays inline with title on mobile */
+    .task-card .task-info {
+        width: 100%;
+    }
+
+    /* Actions row spans full width */
+    .task-actions {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+
+    /* Filter buttons fill width */
+    .filter-bar {
+        flex-wrap: wrap;
+    }
+
+    .filter-bar button {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Auth card takes full width */
+    .auth-container {
+        margin: 24px 16px;
+        padding: 24px;
+    }
 }
