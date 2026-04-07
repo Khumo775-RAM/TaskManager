@@ -247,4 +247,4 @@ frontend/
 
 ## Purpose
 
-This project was built to demonstrate full-stack development skills including REST API design, authentication, database integration, and React frontend development. It is intended as a portfolio piece for a software developer internship application.
+This project was built to demonstrate full-stack development skills including REST API design, authentication, database integration, and React frontend development.
