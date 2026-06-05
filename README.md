@@ -23,26 +23,26 @@ A full-stack task management web application that allows users to create account
 ## Screenshots
 
 ### Login Page
-<img width="600" height="800" alt="Screenshot 2026-06-05 203240" src="https://github.com/user-attachments/assets/c98db1f9-9f3e-4edc-bc6a-d46736607c89" />
+<img width="1280" height="800" alt="Screenshot 2026-06-05 203240" src="https://github.com/user-attachments/assets/c98db1f9-9f3e-4edc-bc6a-d46736607c89" />
 
 ### Register Page
-<img width="600" height="800" alt="Screenshot 2026-06-05 203331" src="https://github.com/user-attachments/assets/2c009b18-a10c-4b6f-b310-d54d8db1eaf2" />
+<img width="1280" height="800" alt="Screenshot 2026-06-05 203331" src="https://github.com/user-attachments/assets/2c009b18-a10c-4b6f-b310-d54d8db1eaf2" />
 
 
 ### Dashboard
-<img width="600" height="800" alt="Screenshot 2026-06-05 204143" src="https://github.com/user-attachments/assets/22d0a601-6b68-42a1-8b53-c307cabdd847" />
+<img width="1280" height="640" alt="Screenshot 2026-06-05 204143" src="https://github.com/user-attachments/assets/22d0a601-6b68-42a1-8b53-c307cabdd847" />
 
 ---
-<img width="600" height="800" alt="Screenshot 2026-06-05 204703" src="https://github.com/user-attachments/assets/6434f65c-a779-40d5-b6fc-c6c7581b8501" />
+<img width="1280" height="640" alt="Screenshot 2026-06-05 204703" src="https://github.com/user-attachments/assets/6434f65c-a779-40d5-b6fc-c6c7581b8501" />
 
 ---
-<img width="600" height="800" alt="Screenshot 2026-06-05 204714" src="https://github.com/user-attachments/assets/ea201014-309c-4828-88db-a45d479ca9a7" />
+<img width="1280" height="640" alt="Screenshot 2026-06-05 204714" src="https://github.com/user-attachments/assets/ea201014-309c-4828-88db-a45d479ca9a7" />
 
 ---
-<img width="600" height="800" alt="Screenshot 2026-06-05 204726" src="https://github.com/user-attachments/assets/ec73dcb4-6dd2-497b-a931-edbec852a630" />
+<img width="1280" height="640" alt="Screenshot 2026-06-05 204726" src="https://github.com/user-attachments/assets/ec73dcb4-6dd2-497b-a931-edbec852a630" />
 
 ---
-<img width="600" height="800" alt="Screenshot 2026-06-05 204758" src="https://github.com/user-attachments/assets/c346dd1c-a4d1-4e0c-9819-8716437dc5cc" />
+<img width="1280" height="640" alt="Screenshot 2026-06-05 204758" src="https://github.com/user-attachments/assets/c346dd1c-a4d1-4e0c-9819-8716437dc5cc" />
 
 
 ---
